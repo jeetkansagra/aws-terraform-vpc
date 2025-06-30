@@ -1,0 +1,19 @@
+# .gitignore for Terraform projects
+
+# Local Terraform state
+terraform.tfstate
+terraform.tfstate.backup
+
+# Local Terraform config
+.terraform/
+
+# Crash logs
+crash.log
+
+# Local variable files (if you use them)
+*.tfvars
+*.tfvars.json
+
+# Editor settings
+.vscode/
+.idea/
