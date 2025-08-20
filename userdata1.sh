@@ -1,39 +1,47 @@
 #!/bin/bash
-apt update
+# Update and install Apache
+apt update -y
 apt install -y apache2
 
-# Get the instance ID using the instance metadata
-INSTANCE_ID=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)
-
-# Install the AWS CLI
-apt install -y awscli
-
-# Download the images from S3 bucket
-#aws s3 cp s3://myterraformprojectbucket2023/project.webp /var/www/html/project.png --acl public-read
-
-# Create a simple HTML file with the portfolio content and display the images
+# Create a beautiful static HTML page
 cat <<EOF > /var/www/html/index.html
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My Portfolio</title>
+  <title>My EC2 Page</title>
   <style>
-    /* Add animation and styling for the text */
-    @keyframes colorChange {
-      0% { color: red; }
-      50% { color: green; }
-      100% { color: blue; }
+    body { 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: white;
+      padding: 50px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      text-align: center;
+      animation: float 3s ease-in-out infinite;
     }
     h1 {
-      animation: colorChange 2s infinite;
+      color: #ff6600;
+      font-size: 3em;
+      margin: 0;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
     }
   </style>
 </head>
 <body>
-  <h1>Terraform Project Server 1</h1>
-  <h2>Instance ID: <span style="color:green">$INSTANCE_ID</span></h2>
-  <p>Welcome to Cloud Champ's Channel</p>
-  
+  <div class="card">
+    <h1>Second Instance</h1>
+  </div>
 </body>
 </html>
 EOF
